@@ -1,99 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lite Music | Zambia's Music Hub</title>
-<meta name="description" content="Lite Music - Discover music, artists and entertainment news.">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Poppins,sans-serif;background:#f5f5f5;color:#222;transition:.3s}
-header{background:#111;color:#fff;padding:18px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
-.logo{font-size:28px;font-weight:700;color:#ff4500}
-nav{display:flex;gap:20px}
-nav a{color:white;text-decoration:none}
-button{cursor:pointer;border:0;border-radius:5px;padding:10px 15px;background:#ff4500;color:white}
-.hero{padding:100px 8%;text-align:center;color:white;background:linear-gradient(#0008,#0008),url('https://picsum.photos/1600/800');background-size:cover}
-.hero h1{font-size:50px}
-.search{margin-top:25px}
-input{padding:14px;border-radius:5px;border:1px solid #ddd;width:300px}
-.section{width:90%;margin:50px auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
-.card,.news,.artist{background:white;border-radius:10px;overflow:hidden;padding:15px;box-shadow:0 5px 20px #0001}
-.card img,.news img{width:100%;border-radius:8px}
-.artist{text-align:center}
-.artist img{width:120px;height:120px;border-radius:50%}
-footer{background:#111;color:white;padding:40px;text-align:center}
-.dark{background:#111;color:white}.dark .card,.dark .news,.dark .artist{background:#222}
-@media(max-width:700px){nav{display:none}.hero h1{font-size:35px}}
-</style>
-</head>
-<body>
-
-<header>
-<div class="logo"><i class="fa fa-music"></i> Lite Music</div>
-<nav id="nav">
-<a href="#">Home</a><a href="#">Songs</a><a href="#">Artists</a><a href="#">News</a>
-</nav>
-<button id="theme"><i class="fa fa-moon"></i></button>
-</header>
-
-<section class="hero">
-<h1>Discover Zambia's Latest Music</h1>
-<p>Trending songs, artists, albums and entertainment updates.</p>
-<div class="search">
-<input id="search" placeholder="Search songs...">
-</div>
-</section>
-
 <section class="section">
 <h2>Trending Songs</h2>
+
 <div class="grid" id="songs">
-<div class="card"><img src="https://picsum.photos/400/300?1"><h3>Song Title One</h3><p>Artist Name</p><button>Play</button></div>
-<div class="card"><img src="https://picsum.photos/400/300?2"><h3>Song Title Two</h3><p>Artist Name</p><button>Play</button></div>
-<div class="card"><img src="https://picsum.photos/400/300?3"><h3>Song Title Three</h3><p>Artist Name</p><button>Play</button></div>
+
+<div class="card">
+
+<img src="https://picsum.photos/400/300?1">
+
+<h3>Song Title One</h3>
+
+<p>Artist Name</p>
+
+<button onclick="playSong('Song Title One')">
+<i class="fa fa-play"></i> Play
+</button>
+
+<button onclick="downloadSong('songs/song1.mp3','Song_Title_One.mp3')">
+<i class="fa fa-download"></i> Download
+</button>
+
 </div>
-</section>
 
-<section class="section">
-<h2>Featured Artists</h2>
-<div class="grid">
-<div class="artist"><img src="https://picsum.photos/200?4"><h3>Artist One</h3></div>
-<div class="artist"><img src="https://picsum.photos/200?5"><h3>Artist Two</h3></div>
-<div class="artist"><img src="https://picsum.photos/200?6"><h3>Artist Three</h3></div>
+
+<div class="card">
+
+<img src="https://picsum.photos/400/300?2">
+
+<h3>Song Title Two</h3>
+
+<p>Artist Name</p>
+
+<button onclick="playSong('Song Title Two')">
+<i class="fa fa-play"></i> Play
+</button>
+
+<button onclick="downloadSong('songs/song2.mp3','Song_Title_Two.mp3')">
+<i class="fa fa-download"></i> Download
+</button>
+
 </div>
-</section>
 
-<section class="section">
-<h2>Entertainment News</h2>
-<div class="grid">
-<div class="news"><img src="https://picsum.photos/500/300?7"><h3>Music Awards</h3><p>Latest entertainment updates.</p></div>
-<div class="news"><img src="https://picsum.photos/500/300?8"><h3>Concert News</h3><p>Upcoming events.</p></div>
+
+<div class="card">
+
+<img src="https://picsum.photos/400/300?3">
+
+<h3>Song Title Three</h3>
+
+<p>Artist Name</p>
+
+<button onclick="playSong('Song Title Three')">
+<i class="fa fa-play"></i> Play
+</button>
+
+<button onclick="downloadSong('songs/song3.mp3','Song_Title_Three.mp3')">
+<i class="fa fa-download"></i> Download
+</button>
+
 </div>
+
+</div>
+
 </section>
-
-<footer>
-© 2026 Lite Music - All Rights Reserved
-</footer>
-
-<script>
-const theme=document.getElementById('theme');
-theme.onclick=()=>document.body.classList.toggle('dark');
-
-const search=document.getElementById('search');
-search.onkeyup=()=>{
-let value=search.value.toLowerCase();
-document.querySelectorAll('.card').forEach(c=>{
-c.style.display=c.innerText.toLowerCase().includes(value)?'block':'none';
-});
-};
-
-document.querySelectorAll('.card button').forEach(b=>{
-b.onclick=()=>alert('Music player can be connected here.');
-});
-</script>
-
-</body>
-</html>
