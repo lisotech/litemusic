@@ -11,6 +11,22 @@
             --card-bg: #1e1e1e;
             --text-color: #ffffff;
             --text-muted: #b3b3b3;
+            --header-bg: #000;
+            --border-color: #282828;
+            --search-bg: #282828;
+            --search-text: #fff;
+        }
+
+        .light-mode {
+            --primary-color: #ff3366;
+            --bg-color: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-color: #121212;
+            --text-muted: #666666;
+            --header-bg: #ffffff;
+            --border-color: #dddddd;
+            --search-bg: #e1e1e1;
+            --search-text: #121212;
         }
 
         * {
@@ -18,25 +34,28 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding-bottom: 90px; /* Space for sticky player */
+            padding-bottom: 90px;
         }
 
-        /* Header & Resized Search Bar */
+        /* Header */
         header {
-            background-color: #000;
+            background-color: var(--header-bg);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #282828;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
@@ -44,36 +63,43 @@
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
-            white-space: nowrap;
         }
 
-        .search-bar {
-            flex-grow: 1;
+        .header-controls {
             display: flex;
-            justify-content: flex-end;
-            margin-left: 2rem;
+            align-items: center;
+            gap: 1rem;
         }
 
         .search-bar input {
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
             border: none;
             outline: none;
-            width: 100%;
-            max-width: 450px; /* Resized to be larger and more prominent */
-            background-color: #282828;
-            color: #fff;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+            width: 180px;
+            background-color: var(--search-bg);
+            color: var(--search-text);
+            font-size: 0.85rem;
         }
-        
-        .search-bar input:focus {
-            background-color: #333333;
+
+        .theme-btn {
+            background: var(--search-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .theme-btn:hover {
+            opacity: 0.8;
         }
 
         /* Main Container */
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
@@ -85,37 +111,31 @@
             padding-left: 10px;
         }
 
-        /* Music Grid - 3 Columns */
+        /* Music Grid - 3x3 layout */
         .music-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Enforces 3 items per row */
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
         .music-card {
             background-color: var(--card-bg);
-            border-radius: 12px;
-            transition: transform 0.2s, background-color 0.2s;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 1rem;
             text-align: center;
-            padding-bottom: 1rem;
+            border: 1px solid var(--border-color);
         }
 
-        .music-card:hover {
-            transform: translateY(-5px);
-            background-color: #252525;
-        }
-
-        /* Small Circular Photos */
         .card-img-container {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 1.5rem auto 1rem auto;
-            border-radius: 50%;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            width: 90px;
+            height: 90px;
+            margin-bottom: 0.8rem;
         }
 
         .card-img-container img {
@@ -132,12 +152,12 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.5);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: opacity 0.2s;
-            border-radius: 50%; /* Matches circular image */
         }
 
         .music-card:hover .play-overlay {
@@ -149,54 +169,47 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 1.2rem;
+            width: 35px;
+            height: 35px;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            padding-left: 4px; /* Centers the play triangle perfectly */
         }
 
         .card-content {
-            padding: 0 1.5rem;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
             width: 100%;
+            gap: 0.3rem;
         }
 
         .song-title {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.3rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .artist-name {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 1.2rem;
+            margin-bottom: 0.5rem;
         }
 
         .download-btn {
             background-color: transparent;
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 0.5rem;
-            border-radius: 20px; /* Rounded button to match circles */
+            padding: 0.3rem;
+            border-radius: 4px;
             text-align: center;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             transition: background-color 0.2s, color 0.2s;
-            display: block;
-            width: 100%;
         }
 
         .download-btn:hover {
@@ -210,8 +223,8 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #181818;
-            border-top: 1px solid #282828;
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border-color);
             padding: 0.8rem 2rem;
             display: flex;
             align-items: center;
@@ -227,9 +240,9 @@
         }
 
         .player-info img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* Also circular in player */
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
             object-fit: cover;
         }
 
@@ -260,13 +273,13 @@
         .control-btns button {
             background: none;
             border: none;
-            color: white;
+            color: var(--text-color);
             font-size: 1.2rem;
             cursor: pointer;
         }
 
         .control-btns button.main-play {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--primary-color);
         }
 
@@ -282,7 +295,7 @@
         .progress-bar {
             flex-grow: 1;
             height: 4px;
-            background-color: #404040;
+            background-color: var(--search-bg);
             border-radius: 2px;
             outline: none;
             accent-color: var(--primary-color);
@@ -298,14 +311,9 @@
         }
 
         /* Responsive */
-        @media(max-width: 900px) {
+        @media(max-width: 768px) {
             .music-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-            }
-        }
-        @media(max-width: 600px) {
-            .music-grid {
-                grid-template-columns: 1fr; /* 1 column on small phones */
+                grid-template-columns: repeat(2, 1fr);
             }
             .player-bar {
                 flex-direction: column;
@@ -319,8 +327,11 @@
             body {
                 padding-bottom: 140px;
             }
-            .search-bar input {
-                max-width: 150px;
+        }
+
+        @media(max-width: 480px) {
+            .music-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -330,8 +341,11 @@
     <!-- Header Section -->
     <header>
         <a href="#" class="logo">Lite Music</a>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search song or artist..." onkeyup="filterMusic()">
+        <div class="header-controls">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search song..." onkeyup="filterMusic()">
+            </div>
+            <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">☀️ Light</button>
         </div>
     </header>
 
@@ -375,7 +389,6 @@
     <audio id="audioPlayer" ontimeupdate="updateProgress()" onended="nextSong()"></audio>
 
     <script>
-        // Added 2 extra tracks so the 3-column layout displays a perfect 2 rows
         const musicTracks = [
             {
                 id: 1,
@@ -393,31 +406,66 @@
             },
             {
                 id: 3,
-                title: "Copperbelt Bounce",
+                title: "Lusaka Groove Anthem",
+                artist: "Mwizukulu Beats",
+                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+            },
+            {
+                id: 4,
+                title: "Copperbelt bounce",
                 artist: "Copper Sound",
                 cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
             },
             {
-                id: 4,
+                id: 5,
                 title: "Smooth Chillout",
                 artist: "Kabwe Nights",
                 cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
             },
             {
-                id: 5,
+                id: 6,
                 title: "Zambezi River Flow",
-                artist: "Waterways Prod.",
-                cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300",
+                artist: "Afro Soul",
+                cover: "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?w=300",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
             },
             {
-                id: 6,
-                title: "City Lights",
-                artist: "Urban Z",
-                cover: "https://images.unsplash.com/photo-1493225457124-a1a2a56df6ed?w=300",
+                id: 7,
+                title: "Sunset Boulevard",
+                artist: "Urban Groove",
+                cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300",
                 audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+            },
+            {
+                id: 8,
+                title: "Savanna Beats",
+                artist: "Rhythm Kings",
+                cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+            },
+            {
+                id: 9,
+                title: "Midnight Express",
+                artist: "Electro Vibe",
+                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+            },
+            {
+                id: 10,
+                title: "Electronic Horizon",
+                artist: "Synth Wave",
+                cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+            },
+            {
+                id: 10,
+                title: "Electronic Horizon",
+                artist: "Synth Wave",
+                cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
             }
         ];
 
@@ -431,7 +479,6 @@
         const currentTimeEl = document.getElementById('currentTime');
         const durationEl = document.getElementById('duration');
 
-        // Render Cards
         function renderMusic(tracks) {
             const grid = document.getElementById('musicGrid');
             grid.innerHTML = '';
@@ -446,10 +493,8 @@
                             </div>
                         </div>
                         <div class="card-content">
-                            <div>
-                                <div class="song-title" title="${track.title}">${track.title}</div>
-                                <div class="artist-name">${track.artist}</div>
-                            </div>
+                            <div class="song-title" title="${track.title}">${track.title}</div>
+                            <div class="artist-name">${track.artist}</div>
                             <a href="${track.audio}" download class="download-btn" target="_blank">Download MP3</a>
                         </div>
                     </div>
@@ -457,7 +502,6 @@
             });
         }
 
-        // Initialize display
         renderMusic(musicTracks);
 
         function playTrack(index) {
@@ -525,6 +569,16 @@
                 track.artist.toLowerCase().includes(query)
             );
             renderMusic(filtered);
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const btn = document.getElementById('themeToggleBtn');
+            if(document.body.classList.contains('light-mode')) {
+                btn.innerText = "🌙 Dark";
+            } else {
+                btn.innerText = "☀️ Light";
+            }
         }
     </script>
 </body>
