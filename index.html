@@ -36,7 +36,7 @@
         /* Header */
         header {
             background-color: var(--header-bg);
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -52,25 +52,27 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
+            width: 100%;
+            justify-content: space-between;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
         }
 
-        /* Boomplay-inspired compact search engine bar */
+        /* Reduced size for search engine bar */
         .search-bar input {
-            padding: 0.3rem 0.7rem;
-            border-radius: 12px;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
             border: none;
             outline: none;
-            width: 180px;
+            width: 130px;
             background-color: var(--search-bg);
             color: var(--search-text);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .header-right {
@@ -282,7 +284,7 @@
         <div class="header-left">
             <a href="#" class="logo" onclick="resetView(); return false;">Lite Music</a>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search artist or track..." onkeyup="globalSearch()">
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="globalSearch()">
             </div>
         </div>
     </header>
