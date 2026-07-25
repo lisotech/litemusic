@@ -73,10 +73,21 @@
             text-decoration: none;
         }
 
+        /* Boomplay-inspired compact search engine bar */
+        .search-bar input {
+            padding: 0.3rem 0.7rem;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+            width: 140px;
+            background-color: var(--search-bg);
+            color: var(--search-text);
+            font-size: 0.8rem;
+        }
+
         .header-right {
             display: flex;
             align-items: center;
-            gap: 1rem;
         }
 
         .theme-btn {
@@ -92,18 +103,6 @@
 
         .theme-btn:hover {
             opacity: 0.8;
-        }
-
-        /* Boomplay-inspired compact search engine bar */
-        .search-bar input {
-            padding: 0.3rem 0.7rem;
-            border-radius: 12px;
-            border: none;
-            outline: none;
-            width: 140px;
-            background-color: var(--search-bg);
-            color: var(--search-text);
-            font-size: 0.8rem;
         }
 
         /* Main Container */
@@ -230,12 +229,12 @@
     <header>
         <div class="header-left">
             <a href="#" class="logo">Lite Music</a>
-        </div>
-        <div class="header-right">
-            <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search song..." onkeyup="filterMusic()">
             </div>
+        </div>
+        <div class="header-right">
+            <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
