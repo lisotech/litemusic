@@ -63,7 +63,7 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .logo {
@@ -211,20 +211,6 @@
 
         /* Responsive */
         @media(max-width: 768px) {
-            header {
-                justify-content: space-between;
-            }
-            .header-right {
-                order: 2;
-            }
-            .header-left {
-                order: 1;
-                width: 100%;
-                justify-content: space-between;
-            }
-            .search-bar input {
-                width: 100%;
-            }
             .music-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
