@@ -11,6 +11,22 @@
             --card-bg: #1e1e1e;
             --text-color: #ffffff;
             --text-muted: #b3b3b3;
+            --header-bg: #000;
+            --player-bg: #181818;
+            --search-bg: #282828;
+            --border-color: #282828;
+        }
+
+        .light-mode {
+            --primary-color: #e6004c;
+            --bg-color: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-color: #121212;
+            --text-muted: #666666;
+            --header-bg: #ffffff;
+            --player-bg: #eaeaea;
+            --search-bg: #e0e0e0;
+            --border-color: #dddddd;
         }
 
         * {
@@ -18,22 +34,23 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding-bottom: 90px; /* Space for sticky player */
+            padding-bottom: 90px;
         }
 
         /* Header */
         header {
-            background-color: #000;
+            background-color: var(--header-bg);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #282828;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -46,14 +63,34 @@
             text-decoration: none;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .search-bar input {
             padding: 0.5rem 1rem;
             border-radius: 20px;
             border: none;
             outline: none;
             width: 250px;
-            background-color: #282828;
-            color: #fff;
+            background-color: var(--search-bg);
+            color: var(--text-color);
+        }
+
+        .theme-toggle-btn {
+            background: var(--search-bg);
+            border: none;
+            color: var(--text-color);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
         }
 
         /* Main Container */
@@ -73,7 +110,7 @@
         /* Music Grid */
         .music-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1.5rem;
         }
 
@@ -81,6 +118,7 @@
             background-color: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: transform 0.2s, background-color 0.2s;
             display: flex;
             flex-direction: column;
@@ -88,13 +126,13 @@
 
         .music-card:hover {
             transform: translateY(-5px);
-            background-color: #252525;
         }
 
+        /* Resized photo container (Compact square format) */
         .card-img-container {
             position: relative;
             width: 100%;
-            height: 200px;
+            aspect-ratio: 1 / 1;
         }
 
         .card-img-container img {
@@ -126,9 +164,9 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -137,7 +175,7 @@
         }
 
         .card-content {
-            padding: 1rem;
+            padding: 0.8rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -145,29 +183,29 @@
         }
 
         .song-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .artist-name {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .download-btn {
             background-color: transparent;
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 0.4rem;
+            padding: 0.35rem;
             border-radius: 4px;
             text-align: center;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             transition: background-color 0.2s, color 0.2s;
         }
@@ -183,8 +221,8 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #181818;
-            border-top: 1px solid #282828;
+            background-color: var(--player-bg);
+            border-top: 1px solid var(--border-color);
             padding: 0.8rem 2rem;
             display: flex;
             align-items: center;
@@ -200,8 +238,8 @@
         }
 
         .player-info img {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 4px;
             object-fit: cover;
         }
@@ -233,7 +271,7 @@
         .control-btns button {
             background: none;
             border: none;
-            color: white;
+            color: var(--text-color);
             font-size: 1.2rem;
             cursor: pointer;
         }
@@ -255,7 +293,7 @@
         .progress-bar {
             flex-grow: 1;
             height: 4px;
-            background-color: #404040;
+            background-color: var(--search-bg);
             border-radius: 2px;
             outline: none;
             accent-color: var(--primary-color);
@@ -284,6 +322,9 @@
             body {
                 padding-bottom: 140px;
             }
+            .search-bar input {
+                width: 180px;
+            }
         }
     </style>
 </head>
@@ -292,8 +333,11 @@
     <!-- Header Section -->
     <header>
         <a href="#" class="logo">Lite Music</a>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search song or artist..." onkeyup="filterMusic()">
+        <div class="header-actions">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search song or artist..." onkeyup="filterMusic()">
+            </div>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌙</button>
         </div>
     </header>
 
@@ -301,7 +345,7 @@
     <div class="container">
         <h2>Trending Tracks</h2>
         <div class="music-grid" id="musicGrid">
-            <!-- Music cards will be injected dynamically via JavaScript -->
+            <!-- Music cards injected dynamically -->
         </div>
     </div>
 
@@ -337,7 +381,6 @@
     <audio id="audioPlayer" ontimeupdate="updateProgress()" onended="nextSong()"></audio>
 
     <script>
-        // Sample data mimicking a music downloading site (using reliable copyright-free audio samples)
         const musicTracks = [
             {
                 id: 1,
@@ -378,6 +421,7 @@
         const progressBar = document.getElementById('progressBar');
         const currentTimeEl = document.getElementById('currentTime');
         const durationEl = document.getElementById('duration');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
 
         // Render Cards
         function renderMusic(tracks) {
@@ -395,7 +439,7 @@
                         </div>
                         <div class="card-content">
                             <div>
-                                <div class="music-title" title="${track.title}">${track.title}</div>
+                                <div class="song-title" title="${track.title}">${track.title}</div>
                                 <div class="artist-name">${track.artist}</div>
                             </div>
                             <a href="${track.audio}" download class="download-btn" target="_blank">Download MP3</a>
@@ -405,8 +449,17 @@
             });
         }
 
-        // Initialize display
         renderMusic(musicTracks);
+
+        // Theme toggler logic
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                themeToggleBtn.innerText = "☀️";
+            } else {
+                themeToggleBtn.innerText = "🌙";
+            }
+        }
 
         function playTrack(index) {
             currentTrackIndex = index;
