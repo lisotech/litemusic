@@ -7,7 +7,7 @@
     <style>
         :root {
             --primary-color: #ff3366;
-            --bg-color: #f4f4f4;
+            --bg-color: #fafafa;
             --card-bg: #ffffff;
             --text-color: #121212;
             --text-muted: #666666;
@@ -15,18 +15,6 @@
             --border-color: #dddddd;
             --search-bg: #e1e1e1;
             --search-text: #121212;
-        }
-
-        .dark-mode {
-            --primary-color: #ff3366;
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted: #b3b3b3;
-            --header-bg: #000;
-            --border-color: #282828;
-            --search-bg: #282828;
-            --search-text: #fff;
         }
 
         * {
@@ -79,7 +67,7 @@
             border-radius: 12px;
             border: none;
             outline: none;
-            width: 140px;
+            width: 180px;
             background-color: var(--search-bg);
             color: var(--search-text);
             font-size: 0.8rem;
@@ -90,34 +78,42 @@
             align-items: center;
         }
 
-        .theme-btn {
-            background: var(--search-bg);
-            color: var(--text-color);
-            border: none;
-            padding: 0.3rem 0.6rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .theme-btn:hover {
-            opacity: 0.8;
-        }
-
         /* Main Container */
         .container {
             max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
             flex: 1;
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
 
         h2 {
-            margin-bottom: 1.5rem;
             font-size: 1.8rem;
             border-left: 4px solid var(--primary-color);
             padding-left: 10px;
+        }
+
+        .back-btn {
+            background-color: var(--search-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .back-btn:hover {
+            opacity: 0.8;
         }
 
         /* Music Grid - 3x3 layout */
@@ -138,13 +134,20 @@
             padding: 1rem;
             text-align: center;
             border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        /* Small circular profile style photo resembling Boomplay artist/track grid */
+        .music-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Small circular profile style photo matching reference image */
         .card-img-container {
             position: relative;
-            width: 75px;
-            height: 75px;
+            width: 85px;
+            height: 85px;
             margin-bottom: 0.6rem;
         }
 
@@ -160,14 +163,16 @@
             flex-direction: column;
             width: 100%;
             gap: 0.2rem;
+            align-items: center;
         }
 
         .song-title {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
         }
 
         .artist-name {
@@ -176,33 +181,80 @@
             margin-bottom: 0.4rem;
         }
 
-        .download-btn {
+        .action-buttons {
+            display: flex;
+            gap: 0.4rem;
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.3rem;
+        }
+
+        .player-btn, .download-btn {
             background-color: transparent;
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 0.25rem;
+            padding: 0.25rem 0.5rem;
             border-radius: 4px;
             text-align: center;
             text-decoration: none;
             font-size: 0.7rem;
             font-weight: 600;
+            cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
+            flex: 1;
         }
 
-        .download-btn:hover {
+        .player-btn:hover, .download-btn:hover {
             background-color: var(--primary-color);
             color: white;
         }
 
-        /* Footer */
+        /* Footer Animation Styles */
         footer {
-            background-color: var(--header-bg);
+            background-color: #1e3a8a;
             border-top: 1px solid var(--border-color);
             text-align: center;
             padding: 1.5rem;
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: white;
             margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-flowers-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .falling-flower {
+            position: absolute;
+            top: -20px;
+            font-size: 16px;
+            user-select: none;
+            animation: fallAnimation linear infinite;
+        }
+
+        @keyframes fallAnimation {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(160px) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+
+        .footer-content-inner {
+            position: relative;
+            z-index: 2;
         }
 
         footer p {
@@ -228,102 +280,239 @@
     <!-- Header Section -->
     <header>
         <div class="header-left">
-            <a href="#" class="logo">Lite Music</a>
+            <a href="#" class="logo" onclick="resetView(); return false;">Lite Music</a>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search song..." onkeyup="filterMusic()">
+                <input type="text" id="searchInput" placeholder="Search artist or track..." onkeyup="globalSearch()">
             </div>
-        </div>
-        <div class="header-right">
-            <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <!-- Main Section -->
     <div class="container">
-        <h2>Trending Tracks</h2>
+        <div class="section-header">
+            <h2 id="sectionTitle">Albums and Tracks</h2>
+            <button class="back-btn" id="backBtn" onclick="resetView()">← Back</button>
+        </div>
         <div class="music-grid" id="musicGrid">
-            <!-- Music cards will be injected dynamically via JavaScript -->
+            <!-- Dynamic elements injected here -->
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Custom styled compact footer with blue background and dropping green/orange flowers -->
     <footer>
-        <p>&copy; 2026 Lite Music. All rights reserved.</p>
-        <p>Fast streaming and lightweight music downloader platform.</p>
+        <div class="footer-flowers-container" id="flowerContainer"></div>
+        <div class="footer-content-inner">
+            <!-- Colored Box Social Layout with Vector Emblems inside -->
+            <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom: 10px;">
+
+               <!-- Phone Call Layout -->
+              <a href="tel:+260974101130" style="
+                    width:105px;
+                    height:38px;
+                    background-color: #008080;
+                    border-radius:4px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    gap: 6px;
+                    color:white;
+                    font-size:11px;
+                    font-weight:600;
+                    text-decoration:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                Call Us
+              </a>
+              <!-- Facebook Layout -->
+              <a href="https://www.facebook.com/lisotechinnovations" target="_blank" style="
+                    width:105px;
+                    height:38px;
+                    background-color: #1877F2;
+                    border-radius:4px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    gap: 6px;
+                    color:white;
+                    font-size:11px;
+                    font-weight:600;
+                    text-decoration:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+              </a>
+
+              <!-- WhatsApp Layout -->
+              <a href="https://wa.me/message/NEGCGNOZ4BOHP1" target="_blank" style="
+                    width:105px;
+                    height:38px;
+                    background-color: #25D366;
+                    border-radius:4px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    gap: 6px;
+                    color:white;
+                    font-size:11px;
+                    font-weight:600;
+                    text-decoration:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.933-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.933 11.892-1.99-.001-3.95-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-2.646-1.027-5.132-2.9-7.005-1.873-1.873-4.363-2.896-7.01-2.898-5.448 0-9.886 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.774-.725 2.022-1.424.248-.699.248-1.299.174-1.424z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+            
+            <div>
+              <p style="margin:5px 0; font-size:13px; opacity:0.95;">
+                © Lite Music Media || All Rights Reserved.
+              </p>
+            </div>
+            
+            <div style="margin-top: 5px;">
+              <marquee style="font-size:12px; max-width: 500px; margin: 0 auto; display: block;">Designed @Lisotech Innovations. call or whatsapp +260974101130</marquee>
+            </div>
+        </div>
     </footer>
 
     <script>
-        const musicTracks = [
+        const artistsData = [
             {
-                id: 1,
-                title: "African Sunrise Vibe",
-                artist: "DJ Chef Zed",
-                cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                name: "Fresh Sound",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "African Sunrise Vibe", artist: "Yo Maps", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Finally", artist: "Yo Maps", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Aweah", artist: "Yo Maps", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 2,
-                title: "Lusaka Groove Anthem",
-                artist: "Mwizukulu Beats",
-                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+                name: "Pop",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Global Pop Anthem", artist: "Various Artists", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Neon Lights", artist: "Various Artists", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 3,
-                title: "Copperbelt bounce",
-                artist: "Copper Sound",
-                cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+                name: "Y Celeb",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Copperbelt bounce", artist: "Y Celeb", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Mwango", artist: "Y Celeb", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 4,
-                title: "Smooth Chillout",
-                artist: "Kabwe Nights",
-                cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+                name: "Gunna",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Smooth Chillout", artist: "Gunna", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Drip Season Vibe", artist: "Gunna", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 5,
-                title: "Zambezi River Flow",
-                artist: "Afro Soul",
-                cover: "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+                name: "Drake",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Zambezi River Flow", artist: "Drake", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Midnight City", artist: "Drake", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 6,
-                title: "Sunset Boulevard",
-                artist: "Urban Groove",
-                cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+                name: "Chile One Mr Z...",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Sunset Boulevard", artist: "Chile One Mr Z...", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Fwekeleni", artist: "Chile One Mr Z...", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 7,
-                title: "Savanna Beats",
-                artist: "Rhythm Kings",
-                cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+                name: "Driemo Mw",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "No More", artist: "Driemo Mw", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Pano", artist: "Driemo Mw", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 8,
-                title: "Midnight Express",
-                artist: "Electro Vibe",
-                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+                name: "YoungBoy Nev...",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Top Tracks Mix", artist: "YoungBoy Nev...", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Lonely Child", artist: "YoungBoy Nev...", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             },
             {
-                id: 9,
-                title: "Electronic Horizon",
-                artist: "Synth Wave",
-                cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+                name: "Chef 187",
+                cover: "albumcover.png",
+                tracks: [
+                    { title: "Nomine", artist: "Chef 187", cover: "albumcover.png", audio: "1.mp3" },
+                    { title: "Coordinate", artist: "Chef 187", cover: "albumcover.png", audio: "1.mp3" }
+                ]
             }
         ];
 
-        function renderMusic(tracks) {
+        let currentView = 'artists';
+        let currentActiveArtist = null;
+        let currentAudio = null;
+        let currentPlayingBtn = null;
+
+        function renderArtists(list) {
             const grid = document.getElementById('musicGrid');
+            const title = document.getElementById('sectionTitle');
+            const backBtn = document.getElementById('backBtn');
+            
+            title.innerText = "Albums and Tracks";
+            backBtn.style.display = 'none';
             grid.innerHTML = '';
             
-            tracks.forEach((track) => {
+            if (list.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">No artists found.</p>`;
+                return;
+            }
+
+            list.forEach((artist) => {
+                grid.innerHTML += `
+                    <div class="music-card" onclick="openArtistTracks('${artist.name}')">
+                        <div class="card-img-container">
+                            <img src="${artist.cover}" alt="${artist.name}">
+                        </div>
+                        <div class="card-content">
+                            <div class="song-title" title="${artist.name}">${artist.name}</div>
+                            <div class="artist-name">Explore Tracks</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function openArtistTracks(artistName) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+                currentPlayingBtn = null;
+            }
+
+            currentView = 'tracks';
+            currentActiveArtist = artistName;
+            const artist = artistsData.find(a => a.name === artistName);
+            if (!artist) return;
+
+            renderTracks(artist.name, artist.tracks);
+        }
+
+        function renderTracks(artistName, tracksList) {
+            const grid = document.getElementById('musicGrid');
+            const title = document.getElementById('sectionTitle');
+            const backBtn = document.getElementById('backBtn');
+
+            title.innerText = `${artistName} - Tracks`;
+            backBtn.style.display = 'block';
+            grid.innerHTML = '';
+
+            if (tracksList.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">No tracks found.</p>`;
+                return;
+            }
+
+            tracksList.forEach((track, index) => {
+                const audioId = `audio-${artistName}-${index}`.replace(/[^a-zA-Z0-9-_]/g, '');
                 grid.innerHTML += `
                     <div class="music-card">
                         <div class="card-img-container">
@@ -332,33 +521,173 @@
                         <div class="card-content">
                             <div class="song-title" title="${track.title}">${track.title}</div>
                             <div class="artist-name">${track.artist}</div>
-                            <a href="${track.audio}" download class="download-btn" target="_blank">Download MP3</a>
+                            <audio id="${audioId}" src="${track.audio}"></audio>
+                            <div class="action-buttons">
+                                <button class="player-btn" id="btn-${audioId}" onclick="togglePlay('${audioId}')">Play ▶</button>
+                                <a href="${track.audio}" download class="download-btn" target="_blank">Download</a>
+                            </div>
                         </div>
                     </div>
                 `;
             });
         }
 
-        renderMusic(musicTracks);
+        function togglePlay(audioId) {
+            const audioElem = document.getElementById(audioId);
+            const btnElem = document.getElementById(`btn-${audioId}`);
 
-        function filterMusic() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = musicTracks.filter(track => 
-                track.title.toLowerCase().includes(query) || 
-                track.artist.toLowerCase().includes(query)
-            );
-            renderMusic(filtered);
+            if (currentAudio && currentAudio !== audioElem) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                if (currentPlayingBtn) {
+                    currentPlayingBtn.innerText = "Play ▶";
+                }
+            }
+
+            if (audioElem.paused) {
+                audioElem.play().then(() => {
+                    currentAudio = audioElem;
+                    currentPlayingBtn = btnElem;
+                    btnElem.innerText = "Pause ⏸";
+                }).catch(e => {
+                    alert("Audio source could not be played.");
+                });
+            } else {
+                audioElem.pause();
+                btnElem.innerText = "Play ▶";
+                currentAudio = null;
+                currentPlayingBtn = null;
+            }
+
+            audioElem.onended = function() {
+                btnElem.innerText = "Play ▶";
+                currentAudio = null;
+                currentPlayingBtn = null;
+            };
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const btn = document.getElementById('themeToggleBtn');
-            if(document.body.classList.contains('dark-mode')) {
-                btn.innerText = "☀️";
-            } else {
-                btn.innerText = "🌙";
+        function resetView() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+                currentPlayingBtn = null;
+            }
+            currentView = 'artists';
+            currentActiveArtist = null;
+            document.getElementById('searchInput').value = '';
+            renderArtists(artistsData);
+        }
+
+        function globalSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const grid = document.getElementById('musicGrid');
+            const title = document.getElementById('sectionTitle');
+            const backBtn = document.getElementById('backBtn');
+
+            if (query === "") {
+                if (currentView === 'artists') {
+                    renderArtists(artistsData);
+                } else if (currentView === 'tracks' && currentActiveArtist) {
+                    const artist = artistsData.find(a => a.name === currentActiveArtist);
+                    if (artist) renderTracks(artist.name, artist.tracks);
+                }
+                return;
+            }
+
+            if (currentView === 'tracks' && currentActiveArtist) {
+                const artist = artistsData.find(a => a.name === currentActiveArtist);
+                if (artist) {
+                    const filteredTracks = artist.tracks.filter(track => 
+                        track.title.toLowerCase().includes(query) || 
+                        track.artist.toLowerCase().includes(query)
+                    );
+                    renderTracks(artist.name, filteredTracks);
+                }
+                return;
+            }
+
+            currentView = 'global-search';
+            title.innerText = `Search Results for "${query}"`;
+            backBtn.style.display = 'block';
+            grid.innerHTML = '';
+
+            const matchingArtists = artistsData.filter(artist => 
+                artist.name.toLowerCase().includes(query)
+            );
+
+            let matchingTracks = [];
+            artistsData.forEach(artist => {
+                artist.tracks.forEach(track => {
+                    if (track.title.toLowerCase().includes(query) || track.artist.toLowerCase().includes(query)) {
+                        matchingTracks.push(track);
+                    }
+                });
+            });
+
+            if (matchingArtists.length === 0 && matchingTracks.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">No matching artists or tracks found.</p>`;
+                return;
+            }
+
+            matchingArtists.forEach((artist) => {
+                grid.innerHTML += `
+                    <div class="music-card" onclick="openArtistTracks('${artist.name}')">
+                        <div class="card-img-container">
+                            <img src="${artist.cover}" alt="${artist.name}">
+                        </div>
+                        <div class="card-content">
+                            <div class="song-title" title="${artist.name}">${artist.name}</div>
+                            <div class="artist-name">Artist / Category</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            matchingTracks.forEach((track, index) => {
+                const audioId = `search-audio-${index}`;
+                grid.innerHTML += `
+                    <div class="music-card">
+                        <div class="card-img-container">
+                            <img src="${track.cover}" alt="${track.title}">
+                        </div>
+                        <div class="card-content">
+                            <div class="song-title" title="${track.title}">${track.title}</div>
+                            <div class="artist-name">${track.artist}</div>
+                            <audio id="${audioId}" src="${track.audio}"></audio>
+                            <div class="action-buttons">
+                                <button class="player-btn" id="btn-${audioId}" onclick="togglePlay('${audioId}')">Play ▶</button>
+                                <a href="${track.audio}" download class="download-btn" target="_blank">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function initFooterFlowers() {
+            const container = document.getElementById('flowerContainer');
+            if (!container) return;
+            
+            const flowerEmojis = ['🌸', '🌼', '🌺', '🌻']; 
+            const flowerCount = 12;
+
+            for (let i = 0; i < flowerCount; i++) {
+                const span = document.createElement('span');
+                span.className = 'falling-flower';
+                span.innerText = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+                
+                span.style.left = Math.random() * 100 + '%';
+                span.style.animationDuration = (3 + Math.random() * 4) + 's';
+                span.style.animationDelay = (Math.random() * 5) + 's';
+                
+                span.style.fontSize = (12 + Math.random() * 10) + 'px';
+                
+                container.appendChild(span);
             }
         }
+
+        renderArtists(artistsData);
+        initFooterFlowers();
     </script>
 </body>
 </html>
