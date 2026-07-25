@@ -97,14 +97,3 @@ b.onclick=()=>alert('Music player can be connected here.');
 
 </body>
 </html>
-'''
-
-folder = Path("/mnt/data/Lite_Music_Website")
-folder.mkdir(exist_ok=True)
-
-html_file = folder / "index.html"
-html_file.write_text(html, encoding="utf-8")
-
-zip_path = Path("/mnt/data/Lite_Music_Website.zip")
-with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-    z.write(html_file, arcname="index.html")
