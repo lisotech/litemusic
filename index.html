@@ -17,6 +17,18 @@
             --search-text: #121212;
         }
 
+        [data-theme="dark"] {
+            --primary-color: #ff3366;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+            --text-muted: #aaaaaa;
+            --header-bg: #181818;
+            --border-color: #333333;
+            --search-bg: #2d2d2d;
+            --search-text: #f0f0f0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -78,6 +90,33 @@
         .header-right {
             display: flex;
             align-items: center;
+        }
+
+        /* Float Theme Toggle Button on Center Right */
+        .theme-float-btn {
+            position: fixed;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1100;
+            font-size: 0.9rem;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .theme-float-btn:hover {
+            transform: translateY(-50%) scale(1.1);
         }
 
         /* Main Container */
@@ -289,6 +328,9 @@
         </div>
     </header>
 
+    <!-- Floating Theme Toggle Button -->
+    <button class="theme-float-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌙</button>
+
     <!-- Main Section -->
     <div class="container">
         <div class="section-header">
@@ -454,6 +496,18 @@
         let currentActiveArtist = null;
         let currentAudio = null;
         let currentPlayingBtn = null;
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeBtn = document.getElementById('themeToggleBtn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                themeBtn.innerText = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeBtn.innerText = '☀️';
+            }
+        }
 
         function renderArtists(list) {
             const grid = document.getElementById('musicGrid');
