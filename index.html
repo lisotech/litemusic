@@ -3,496 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Lite Music | Zambia's Music Hub</title>
-
-<meta name="description" content="Lite Music - Discover the latest Zambian music, albums, entertainment news and artists.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-<link rel="stylesheet" href="style.css">
-
+<meta name="description" content="Lite Music - Discover music, artists and entertainment news.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Poppins,sans-serif;background:#f5f5f5;color:#222;transition:.3s}
+header{background:#111;color:#fff;padding:18px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.logo{font-size:28px;font-weight:700;color:#ff4500}
+nav{display:flex;gap:20px}
+nav a{color:white;text-decoration:none}
+button{cursor:pointer;border:0;border-radius:5px;padding:10px 15px;background:#ff4500;color:white}
+.hero{padding:100px 8%;text-align:center;color:white;background:linear-gradient(#0008,#0008),url('https://picsum.photos/1600/800');background-size:cover}
+.hero h1{font-size:50px}
+.search{margin-top:25px}
+input{padding:14px;border-radius:5px;border:1px solid #ddd;width:300px}
+.section{width:90%;margin:50px auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.card,.news,.artist{background:white;border-radius:10px;overflow:hidden;padding:15px;box-shadow:0 5px 20px #0001}
+.card img,.news img{width:100%;border-radius:8px}
+.artist{text-align:center}
+.artist img{width:120px;height:120px;border-radius:50%}
+footer{background:#111;color:white;padding:40px;text-align:center}
+.dark{background:#111;color:white}.dark .card,.dark .news,.dark .artist{background:#222}
+@media(max-width:700px){nav{display:none}.hero h1{font-size:35px}}
+</style>
 </head>
-
 <body>
 
 <header>
-
-<div class="logo">
-
-<i class="fa-solid fa-music"></i>
-
-Lite Music
-
-</div>
-
+<div class="logo"><i class="fa fa-music"></i> Lite Music</div>
 <nav id="nav">
-
-<a href="#">Home</a>
-
-<a href="#">Latest Songs</a>
-
-<a href="#">Albums</a>
-
-<a href="#">Artists</a>
-
-<a href="#">Videos</a>
-
-<a href="#">News</a>
-
-<a href="#">Contact</a>
-
+<a href="#">Home</a><a href="#">Songs</a><a href="#">Artists</a><a href="#">News</a>
 </nav>
-
-<div class="actions">
-
-<button id="themeBtn">
-<i class="fa-solid fa-moon"></i>
-</button>
-
-<button id="menuBtn">
-<i class="fa-solid fa-bars"></i>
-</button>
-
-</div>
-
+<button id="theme"><i class="fa fa-moon"></i></button>
 </header>
 
 <section class="hero">
-
-<div class="hero-content">
-
-<h1>
-Discover Zambia's Latest Music
-</h1>
-
-<p>
-
-Listen to trending songs, albums, artists and entertainment news all in one place.
-
-</p>
-
-<div class="hero-search">
-
-<input
-type="text"
-placeholder="Search music...">
-
-<button>
-
-<i class="fa fa-search"></i>
-
-Search
-
-</button>
-
+<h1>Discover Zambia's Latest Music</h1>
+<p>Trending songs, artists, albums and entertainment updates.</p>
+<div class="search">
+<input id="search" placeholder="Search songs...">
 </div>
-
-</div>
-
 </section>
 
 <section class="section">
-
-<div class="title">
-
 <h2>Trending Songs</h2>
-
+<div class="grid" id="songs">
+<div class="card"><img src="https://picsum.photos/400/300?1"><h3>Song Title One</h3><p>Artist Name</p><button>Play</button></div>
+<div class="card"><img src="https://picsum.photos/400/300?2"><h3>Song Title Two</h3><p>Artist Name</p><button>Play</button></div>
+<div class="card"><img src="https://picsum.photos/400/300?3"><h3>Song Title Three</h3><p>Artist Name</p><button>Play</button></div>
 </div>
-
-<div class="music-grid">
-
-<div class="music-card">
-
-<img src="https://picsum.photos/400/300?1">
-
-<div class="content">
-
-<h3>Song Title One</h3>
-
-<p>Artist Name</p>
-
-<div class="buttons">
-
-<button>
-<i class="fa fa-play"></i>
-Play
-</button>
-
-<button>
-<i class="fa fa-download"></i>
-Download
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="music-card">
-
-<img src="https://picsum.photos/400/300?2">
-
-<div class="content">
-
-<h3>Song Title Two</h3>
-
-<p>Artist Name</p>
-
-<div class="buttons">
-
-<button>
-<i class="fa fa-play"></i>
-Play
-</button>
-
-<button>
-<i class="fa fa-download"></i>
-Download
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="music-card">
-
-<img src="https://picsum.photos/400/300?3">
-
-<div class="content">
-
-<h3>Song Title Three</h3>
-
-<p>Artist Name</p>
-
-<div class="buttons">
-
-<button>
-Play
-</button>
-
-<button>
-Download
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section latest">
-
-<div class="title">
-
-<h2>Latest Releases</h2>
-
-</div>
-
-<div class="latest-list">
-
-<article>
-
-<img src="https://picsum.photos/250/170?4">
-
-<div>
-
-<h3>Latest Song Release</h3>
-
-<p>
-
-New single now available.
-
-</p>
-
-<a href="#">Read More →</a>
-
-</div>
-
-</article>
-
-<article>
-
-<img src="https://picsum.photos/250/170?5">
-
-<div>
-
-<h3>Brand New Album</h3>
-
-<p>
-
-Latest album release from your favourite artist.
-
-</p>
-
-<a href="#">Read More →</a>
-
-</div>
-
-</article>
-
-<article>
-
-<img src="https://picsum.photos/250/170?6">
-
-<div>
-
-<h3>Top Charts This Week</h3>
-
-<p>
-
-See the most streamed songs.
-
-</p>
-
-<a href="#">Read More →</a>
-
-</div>
-
-</article>
-
-</div>
-
 </section>
 
 <section class="section">
-
-<div class="title">
-
 <h2>Featured Artists</h2>
-
+<div class="grid">
+<div class="artist"><img src="https://picsum.photos/200?4"><h3>Artist One</h3></div>
+<div class="artist"><img src="https://picsum.photos/200?5"><h3>Artist Two</h3></div>
+<div class="artist"><img src="https://picsum.photos/200?6"><h3>Artist Three</h3></div>
 </div>
-
-<div class="artists">
-
-<div class="artist">
-
-<img src="https://picsum.photos/200?7">
-
-<h3>Artist One</h3>
-
-</div>
-
-<div class="artist">
-
-<img src="https://picsum.photos/200?8">
-
-<h3>Artist Two</h3>
-
-</div>
-
-<div class="artist">
-
-<img src="https://picsum.photos/200?9">
-
-<h3>Artist Three</h3>
-
-</div>
-
-<div class="artist">
-
-<img src="https://picsum.photos/200?10">
-
-<h3>Artist Four</h3>
-
-</div>
-
-</div>
-
 </section>
 
 <section class="section">
-
-<div class="title">
-
 <h2>Entertainment News</h2>
-
+<div class="grid">
+<div class="news"><img src="https://picsum.photos/500/300?7"><h3>Music Awards</h3><p>Latest entertainment updates.</p></div>
+<div class="news"><img src="https://picsum.photos/500/300?8"><h3>Concert News</h3><p>Upcoming events.</p></div>
 </div>
-
-<div class="news-grid">
-
-<div class="news">
-
-<img src="https://picsum.photos/500/300?11">
-
-<h3>
-
-Music Awards Announced
-
-</h3>
-
-<p>
-
-Latest updates from the entertainment industry.
-
-</p>
-
-</div>
-
-<div class="news">
-
-<img src="https://picsum.photos/500/300?12">
-
-<h3>
-
-Upcoming Concerts
-
-</h3>
-
-<p>
-
-Check out this month's biggest events.
-
-</p>
-
-</div>
-
-<div class="news">
-
-<img src="https://picsum.photos/500/300?13">
-
-<h3>
-
-Exclusive Interviews
-
-</h3>
-
-<p>
-
-Meet your favourite musicians.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="newsletter">
-
-<h2>
-
-Subscribe
-
-</h2>
-
-<p>
-
-Receive music updates every week.
-
-</p>
-
-<form>
-
-<input
-type="email"
-placeholder="Email Address">
-
-<button>
-
-Subscribe
-
-</button>
-
-</form>
-
 </section>
 
 <footer>
-
-<div class="footer-grid">
-
-<div>
-
-<h3>Lite Music</h3>
-
-<p>
-
-Your destination for Zambian music and entertainment.
-
-</p>
-
-</div>
-
-<div>
-
-<h3>Quick Links</h3>
-
-<ul>
-
-<li><a href="#">Home</a></li>
-
-<li><a href="#">Artists</a></li>
-
-<li><a href="#">Albums</a></li>
-
-<li><a href="#">Videos</a></li>
-
-</ul>
-
-</div>
-
-<div>
-
-<h3>Categories</h3>
-
-<ul>
-
-<li>Hip Hop</li>
-
-<li>Gospel</li>
-
-<li>Amapiano</li>
-
-<li>Dancehall</li>
-
-</ul>
-
-</div>
-
-<div>
-
-<h3>Follow</h3>
-
-<div class="social">
-
-<a href="#"><i class="fab fa-facebook"></i></a>
-
-<a href="#"><i class="fab fa-instagram"></i></a>
-
-<a href="#"><i class="fab fa-youtube"></i></a>
-
-<a href="#"><i class="fab fa-x-twitter"></i></a>
-
-</div>
-
-</div>
-
-</div>
-
-<p class="copyright">
-
-© 2026 Lite Music. All Rights Reserved.
-
-</p>
-
+© 2026 Lite Music - All Rights Reserved
 </footer>
 
-<script src="script.js"></script>
+<script>
+const theme=document.getElementById('theme');
+theme.onclick=()=>document.body.classList.toggle('dark');
+
+const search=document.getElementById('search');
+search.onkeyup=()=>{
+let value=search.value.toLowerCase();
+document.querySelectorAll('.card').forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(value)?'block':'none';
+});
+};
+
+document.querySelectorAll('.card button').forEach(b=>{
+b.onclick=()=>alert('Music player can be connected here.');
+});
+</script>
 
 </body>
 </html>
+'''
+
+folder = Path("/mnt/data/Lite_Music_Website")
+folder.mkdir(exist_ok=True)
+
+html_file = folder / "index.html"
+html_file.write_text(html, encoding="utf-8")
+
+zip_path = Path("/mnt/data/Lite_Music_Website.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    z.write(html_file, arcname="index.html")
