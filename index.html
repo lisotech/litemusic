@@ -40,7 +40,9 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Header */
@@ -58,17 +60,17 @@
             gap: 1rem;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
         }
 
         /* Boomplay-inspired compact search engine bar */
@@ -81,6 +83,12 @@
             background-color: var(--search-bg);
             color: var(--search-text);
             font-size: 0.8rem;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         .theme-btn {
@@ -103,6 +111,7 @@
             max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
+            flex: 1;
         }
 
         h2 {
@@ -186,6 +195,21 @@
             color: white;
         }
 
+        /* Footer */
+        footer {
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
         /* Responsive */
         @media(max-width: 768px) {
             .music-grid {
@@ -204,22 +228,30 @@
 
     <!-- Header Section -->
     <header>
-        <a href="#" class="logo">Lite Music</a>
-        <div class="header-controls">
+        <div class="header-left">
+            <a href="#" class="logo">Lite Music</a>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search song..." onkeyup="filterMusic()">
             </div>
+        </div>
+        <div class="header-controls">
             <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <!-- Main Section -->
     <div class="container">
-        <h2>Track List</h2>
+        <h2>Trending Tracks</h2>
         <div class="music-grid" id="musicGrid">
             <!-- Music cards will be injected dynamically via JavaScript -->
         </div>
     </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2026 Lite Music. All rights reserved.</p>
+        <p>Fast streaming and lightweight music downloader platform.</p>
+    </footer>
 
     <script>
         const musicTracks = [
